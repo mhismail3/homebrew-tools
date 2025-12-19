@@ -5,9 +5,9 @@ Mistral OCR CLI Tool
 Extract text from images using Mistral's OCR API.
 
 Usage:
-    python ocr.py <image-path>
-    python ocr.py <image-path> --copy     # Also copy to clipboard
-    python ocr.py <image-path> -o out.txt # Save to file
+    mistral-ocr <image-path>
+    mistral-ocr <image-path> --copy     # Also copy to clipboard
+    mistral-ocr <image-path> -o out.txt # Save to file
 
 Environment:
     MISTRAL_API_KEY - Your Mistral API key (required)
@@ -49,7 +49,7 @@ def print_usage():
 Mistral OCR - Extract text from images
 
 Usage:
-    python ocr.py <image-path> [options]
+    mistral-ocr <image-path> [options]
 
 Options:
     --copy, -c      Copy extracted text to clipboard
@@ -61,10 +61,10 @@ Environment:
                      Get one at: https://console.mistral.ai/api-keys
 
 Examples:
-    python ocr.py photo.jpg
-    python ocr.py screenshot.png --copy
-    python ocr.py document.jpg -o output.txt
-    MISTRAL_API_KEY=xxx python ocr.py image.png
+    mistral-ocr photo.jpg
+    mistral-ocr screenshot.png --copy
+    mistral-ocr document.jpg -o output.txt
+    MISTRAL_API_KEY=xxx mistral-ocr image.png
 """)
 
 
@@ -186,7 +186,7 @@ def main():
     if not api_key:
         print("Error: MISTRAL_API_KEY environment variable is not set", file=sys.stderr)
         print("Get your API key at: https://console.mistral.ai/api-keys", file=sys.stderr)
-        print("\nUsage: MISTRAL_API_KEY=your-key python ocr.py <image>", file=sys.stderr)
+        print("\nUsage: MISTRAL_API_KEY=your-key mistral-ocr <image>", file=sys.stderr)
         sys.exit(1)
 
     # Resolve and validate image path
