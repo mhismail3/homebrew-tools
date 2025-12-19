@@ -2,7 +2,7 @@ class Imgcopy < Formula
   desc "Multi-provider image text extraction with auto-formatting and cleanup"
   homepage "https://github.com/mhismail3/homebrew-tools"
   url "https://github.com/mhismail3/homebrew-tools/archive/refs/tags/imgcopy-v0.1.0.tar.gz"
-  sha256 "PLACEHOLDER_SHA256"
+  sha256 "fcf74445d6351f12f334e93503c6bc06dc9beb29a0e9a737898cfd7c46ffa6be"
   license "MIT"
 
   depends_on "python@3.11"
