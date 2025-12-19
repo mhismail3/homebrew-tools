@@ -1,8 +1,8 @@
 class MistralOcr < Formula
   desc "Extract text from images using Mistral's OCR API"
   homepage "https://github.com/mhismail3/homebrew-tools"
-  url "https://github.com/mhismail3/homebrew-tools/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "f5451e031a79317de1539f6d3c0d81eb9dc733cb89ad813bc3db175217d0697a"
+  url "https://github.com/mhismail3/homebrew-tools/archive/refs/tags/v0.1.1.tar.gz"
+  sha256 "64046b76c347bc1cfc69acd932725ac74ca10b776d6aa36b3795ee88a034cfd6"
   license "MIT"
 
   depends_on "python@3.11"
