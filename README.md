@@ -14,100 +14,73 @@ brew install <tool-name>
 
 ## Available Tools
 
-### imgcopy
+### things3
 
-Multi-provider image text extraction with auto-formatting and cleanup. Extract text from images using OpenAI, Anthropic, Gemini, or Mistral vision APIs.
+CLI for Things 3 task management with rollback support. Designed for automation and agent use.
 
 ```bash
-brew install imgcopy
+brew install things3
 ```
 
 **Features:**
-- **Multi-provider support**: OpenAI (GPT-4o), Anthropic (Claude 3.5), Gemini, Mistral (default)
-- **Smart text cleanup**: Remove OCR artifacts, fix formatting, smart paragraph joining
-- **Auto-copy to clipboard**: `--clean` flag formats and copies in one step
-- **Flexible output**: stdout, file, or clipboard
-- **Wide format support**: PNG, JPEG, WebP, AVIF, GIF, BMP
-- **Files up to 50MB**
+- Full CRUD operations for to-dos and projects
+- Rollback support via snapshots
+- Structured JSON output for automation
+- Query by list, tag, project, area, deadlines
+- Built-in rate limiting
 
-**Usage:**
-```bash
-# Basic usage (uses Mistral by default)
-imgcopy screenshot.png
-
-# Auto-clean and copy to clipboard
-imgcopy document.jpg --clean
-
-# Use specific provider
-imgcopy photo.png -p openai --clean
-imgcopy scan.jpg -p anthropic --clean
-
-# Use specific model
-imgcopy image.png -m gpt-4o-mini --clean
-
-# Save to file
-imgcopy document.jpg --clean -o output.txt
-```
-
-**Setup:**
-Set the API key for your preferred provider(s):
+**Quick Start:**
 
 ```bash
-# Mistral (default, most cost-effective for OCR)
-export MISTRAL_API_KEY="your-key"
+# Query items
+things3 query                      # Today's items (default)
+things3 query --list inbox         # Items in inbox
+things3 query --projects           # All projects
 
-# OpenAI
-export OPENAI_API_KEY="your-key"
+# Add items
+things3 add "Buy groceries"
+things3 add "Call mom" --when today
+things3 add-project "New Feature" --area "Work"
 
-# Anthropic
-export ANTHROPIC_API_KEY="your-key"
+# Update items (requires auth)
+things3 update <id> --title "New title"
+things3 complete <id>
 
-# Google Gemini
-export GEMINI_API_KEY="your-key"
+# Navigate in Things app
+things3 show today
+things3 show inbox
+
+# Search
+things3 search "meeting"
+
+# Rollback
+things3 snapshots list
+things3 rollback <snapshot-id>
 ```
 
-**Get API Keys:**
-- Mistral: https://console.mistral.ai/api-keys
-- OpenAI: https://platform.openai.com/api-keys
-- Anthropic: https://console.anthropic.com/settings/keys
-- Gemini: https://aistudio.google.com/app/apikey
+**Authentication:**
 
----
+Some operations (update, complete, cancel) require an auth token:
 
-### mistral-ocr
-
-Extract text from images using Mistral's OCR API.
+1. Open Things 3 → Settings → General
+2. Enable "Things URLs"
+3. Copy the auth token
 
 ```bash
-brew install mistral-ocr
+things3 auth setup YOUR_TOKEN_HERE
+things3 auth test    # Verify it works
 ```
 
-**Features:**
-- Extract text from PNG, JPEG, WebP, and AVIF images
-- Output to stdout, file, or clipboard
-- Supports files up to 50MB
-- Uses Mistral's latest OCR model
+**Global Options:**
 
-**Usage:**
 ```bash
-# Basic usage
-mistral-ocr image.jpg
-
-# Copy to clipboard
-mistral-ocr screenshot.png --copy
-
-# Save to file
-mistral-ocr document.jpg -o output.txt
+--json              # Output as JSON
+--dry-run           # Show what would happen
+--quiet             # Suppress non-essential output
+--no-color          # Disable colored output
 ```
 
-**Requirements:**
-- Set `MISTRAL_API_KEY` environment variable
-- Get your API key at: https://console.mistral.ai/api-keys
-
-**Setup:**
-```bash
-export MISTRAL_API_KEY="your-api-key-here"
-```
+For full documentation, see the [things3-cli repository](https://github.com/mhismail3/things3-cli).
 
 ---
 
