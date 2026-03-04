@@ -60,8 +60,8 @@ class TronTwitter < Formula
   end
 
   resource "lxml" do
-    url "https://files.pythonhosted.org/packages/f0/35/f310b987c8bf9e61c4dd8e8035c416bd3230098f5e3cfa69fc4232de7059/lxml-6.0.2.tar.gz"
-    sha256 "875c6b5ab39ad5291588aed6925fac99d0097af0dd62f33c7b43736043d4a2ec"
+    url "https://files.pythonhosted.org/packages/aa/88/262177de60548e5a2bfc46ad28232c9e9cbde697bd94132aeb80364675cb/lxml-6.0.2.tar.gz"
+    sha256 "cd79f3367bd74b317dda655dc8fcfa304d9eb6e4fb06b7168c5cf27f96e0cd62"
   end
 
   resource "m3u8" do
@@ -75,7 +75,7 @@ class TronTwitter < Formula
   end
 
   resource "pyotp" do
-    url "https://files.pythonhosted.org/packages/f3/b2/1d5994ba2acda054a443bd5e2d384175449c7d2b6d1a0614dbca3a63abfc/pyotp-2.9.0.tar.gz"
+    url "https://files.pythonhosted.org/packages/f3/b2/1d5994ba2acde054a443bd5e2d384175449c7d2b6d1a0614dbca3a63abfc/pyotp-2.9.0.tar.gz"
     sha256 "346b6642e0dbdde3b4ff5a930b664ca82abfa116356ed48cc42c7d6590d36f63"
   end
 
