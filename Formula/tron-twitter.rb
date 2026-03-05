@@ -3,8 +3,8 @@ class TronTwitter < Formula
 
   desc "Twitter/X CLI for Tron agent"
   homepage "https://github.com/mhismail3/tron-twitter"
-  url "https://github.com/mhismail3/tron-twitter/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "faeb49a1e0e57c8a2fca79d5caf10496ae2aed23be071a6a3fb3d55969afe673"
+  url "https://github.com/mhismail3/tron-twitter/archive/refs/tags/v0.2.0.tar.gz"
+  sha256 "39342e91210428c070e246c588f478ef8bdbddc6f9fd3742140696eabb0fb463"
   license "MIT"
 
   depends_on "python@3.11"
