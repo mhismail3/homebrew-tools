@@ -1,10 +1,10 @@
 class TronTwitter < Formula
   include Language::Python::Virtualenv
 
-  desc "Twitter/X CLI for Tron agent"
+  desc "Stateless Twitter/X CLI for Tron agent — env-driven auth"
   homepage "https://github.com/mhismail3/tron-twitter"
-  url "https://github.com/mhismail3/tron-twitter/archive/refs/tags/v0.5.0.tar.gz"
-  sha256 "d14d3c71785c32c98160b19fad6dc238c5e89730b01b19010cdb2f239eb40e02"
+  url "https://github.com/mhismail3/tron-twitter/archive/refs/tags/v0.6.0.tar.gz"
+  sha256 "8bbf39d1a21deba0b4e012f3fb5613f4a3b6fbbce7ad06f2e216c020bd19adad"
   license "MIT"
 
   depends_on "python@3.11"
@@ -118,7 +118,25 @@ class TronTwitter < Formula
     virtualenv_install_with_resources
   end
 
+  def caveats
+    <<~EOS
+      tron-twitter is stateless: every invocation reads credentials from
+      environment variables, and nothing is written to disk.
+
+        TRON_TWITTER_COOKIES  Required. JSON object with auth_token and ct0:
+                              {"auth_token": "...", "ct0": "..."}
+
+        TRON_TWITTER_STATE    Optional. JSON bookmark for check-mentions and
+                              check-dms. Those commands emit a
+                              {"items": [...], "state": {...}} envelope;
+                              persist the returned `state` for next call.
+
+      Cold-start cookies must be harvested from a real browser session where
+      you are already signed into x.com. See the project README for details.
+    EOS
+  end
+
   test do
-    system "#{bin}/tron-twitter", "--version"
+    assert_match "tron-twitter, version", shell_output("#{bin}/tron-twitter --version")
   end
 end

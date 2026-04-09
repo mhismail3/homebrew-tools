@@ -84,6 +84,63 @@ For full documentation, see the [things3-cli repository](https://github.com/mhis
 
 ---
 
+### tron-twitter
+
+Stateless Twitter/X CLI for the Tron agent. Wraps [twikit](https://github.com/d60/twikit) for search, trending, timelines, notifications, DMs, and posting — no API keys required.
+
+```bash
+brew install tron-twitter
+```
+
+**Features:**
+- **Stateless by design**: credentials and state come from environment variables, nothing is written to disk
+- **Vault-friendly**: caller owns credential storage; CLI has no path assumptions
+- **Bookmark envelope**: `check-mentions` / `check-dms` return `{"items": [...], "state": {...}}` so callers can persist the new bookmark
+- **JSON or text output** (`--format text`) for read commands
+
+**Quick Start:**
+
+```bash
+# Cookies must be harvested from a signed-in browser session:
+# DevTools → Application → Cookies → https://x.com → copy auth_token and ct0
+export TRON_TWITTER_COOKIES='{"auth_token":"...","ct0":"..."}'
+
+# Read operations
+tron-twitter search "AI agents" --count 20
+tron-twitter trending --category trending
+tron-twitter timeline elonmusk --count 10
+tron-twitter user elonmusk
+tron-twitter notifications --type Mentions
+
+# Stateful — pass state in, persist state out
+OUT=$(TRON_TWITTER_STATE='{"last_mention_ts":0}' tron-twitter check-mentions)
+echo "$OUT" | jq '.items'       # new mentions
+echo "$OUT" | jq '.state'       # → persist back to your state store
+
+# Write operations (require confirmation in agent workflows)
+tron-twitter post "Hello from Tron"
+tron-twitter reply 1234567890 "Great tweet!"
+tron-twitter like 1234567890
+tron-twitter follow elonmusk
+
+# Validate session
+tron-twitter auth status
+```
+
+**Cold start:**
+
+There is no programmatic login. The `auth_token` and `ct0` values must come from a real browser session signed into x.com. Automated logins trip bot detection. Open x.com → DevTools → Application → Cookies → copy both values.
+
+**Why environment variables?**
+
+- No `~/.tron/` writes, no config files, no path assumptions
+- Per-call scoping (inline `VAR=value cmd`) keeps cookies out of sibling tools
+- Credential managers (e.g. the Tron vault) can pipe decrypted values in without ever touching the filesystem
+
+For full documentation, see the [tron-twitter repository](https://github.com/mhismail3/tron-twitter).
+
+---
+
 ## Development
 
 ### Adding a New Formula
